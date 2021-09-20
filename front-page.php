@@ -26,19 +26,21 @@
                   $homePageEvents-> the_post(); ?>
                     <div class="event-summary">
                         <a class="event-summary__date t-center" href="<?php echo site_url(); ?>">
-                          <span class="event-summary__month"><?php the_time('M'); ?></span>
+                          <span class="event-summary__month"><?php the_field('event_date') ?></span>
                           <span class="event-summary__day"><?php the_time('d'); ?></span>
                         </a>
                         <div class="event-summary__content">
                             <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-                            <p><?php echo wp_trim_words(get_the_content(), 18); ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
+                            <p><?php if(has_excerpt()) {
+                                        echo get_the_excerpt();
+                                     } else {
+                                             echo wp_trim_words(get_the_content(), 18); 
+                                            };?> 
+                  <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
                          </div>
                       </div>
-              <?php }  ?>
-
-
-
-          <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+       <?php }  ?>
+          <p class="t-center no-margin"><a href="<?php echo site_url('/event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
@@ -58,7 +60,12 @@
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-              <p><?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink(); ?>" class="nu gray">Read more</a></p>
+              <p><?php if(has_excerpt()) {
+                echo get_the_excerpt();
+                } else {
+                  echo wp_trim_words(get_the_content(), 18); 
+                  };?> 
+                  <a href="<?php the_permalink(); ?>" class="nu gray">Read more</a></p>
             </div>
           </div>
                <?php } wp_reset_postdata();
@@ -95,8 +102,8 @@
           <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('/images/cat3.jpg') ?>)">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">Free Transportation</h2>
-                <p class="t-center">All students have free unlimited bus fare.</p>
+                <h2 class="headline headline--medium t-center">Lizzards for Lunch</h2>
+                <p class="t-center">Cats love lizards (for lunch)</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
@@ -104,8 +111,8 @@
           <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('/images/cat6.jpg') ?>)">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">An Apple a Day</h2>
-                <p class="t-center">Our dentistry program recommends eating apples.</p>
+                <h2 class="headline headline--medium t-center">Birds are Delicious</h2>
+                <p class="t-center">But hard to catch</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
@@ -113,8 +120,8 @@
           <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('/images/cat5.jpg') ?>)">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">Free Food</h2>
-                <p class="t-center">Fictional University offers lunch plans for those in need.</p>
+                <h2 class="headline headline--medium t-center">Only approved petting location</h2>
+                <p class="t-center">At the base of the tail</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>

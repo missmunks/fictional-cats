@@ -16,5 +16,8 @@ function cat_title_features() {
     // register_nav_menu('footerLocationTwo', 'Footer Location Two');
     add_theme_support('title-tag');
 }
+
+
 add_action('after_setup_theme', 'cat_title_features');
+
 
