@@ -17,17 +17,32 @@
         <div class="full-width-split__inner">
           <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
               <?php
+              $today = date('Ymd');
                 $homePageEvents = new WP_Query(array(
                   'posts_per_page'=> 2,
-                  'post_type'=> 'event'
+                  'post_type'=> 'event',
+                  'meta_key'=> 'event_date',
+                  'orderby'=> 'meta_value_num',
+                  'order' => 'ASC',
+                  'meta_query'=> array(
+                    array(
+                      'key'=> 'event_date',
+                      'compare' => '>=',
+                      'value'=> $today,
+                      'type'=> 'numeric'
+                    )
+                  )
                     ));
 
                 while($homePageEvents-> have_posts()) {
                   $homePageEvents-> the_post(); ?>
                     <div class="event-summary">
                         <a class="event-summary__date t-center" href="<?php echo site_url(); ?>">
-                          <span class="event-summary__month"><?php the_field('event_date') ?></span>
-                          <span class="event-summary__day"><?php the_time('d'); ?></span>
+                          <span class="event-summary__month"><?php 
+                            $eventDate = new DateTime(get_field('event_date'));
+                             echo $eventDate->format('M');
+                          ?></span>
+                          <span class="event-summary__day"><?php  echo $eventDate->format('d'); ?></span>
                         </a>
                         <div class="event-summary__content">
                             <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
@@ -40,7 +55,7 @@
                          </div>
                       </div>
        <?php }  ?>
-          <p class="t-center no-margin"><a href="<?php echo site_url('/event'); ?>" class="btn btn--blue">View All Events</a></p>
+          <p class="t-center no-margin"><a href="<?php echo site_url('/events'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
